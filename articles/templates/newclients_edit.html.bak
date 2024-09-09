@@ -1,0 +1,50 @@
+{% load render_table from django_tables2 %}
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+<link rel="stylesheet" href="{{ STATIC_URL }}/static/css/article.css">
+</head>
+    <body>
+	<a href="/clients">Клиенты</a>
+	<a href="/contracts">Контракты</a>
+	<a href="/deliveries">Доставка</a>
+	<a href="/finances">Финансы</a>
+	<a href="/jobs">Должности</a>
+	<a href="/opjournal">Журнал операций</a>
+	<a href="/registry">Реестр товаров</a>
+	<a href="/suppliers">Поставщики</a>
+	<a href="/valuables">Информация о товарах</a>
+	<a href="/workers">Список сотрудников</a>
+	<a href="/logout">Выход из системы</a>
+	<center>
+	<h1>Редактировать запись</h1>
+	<hr/>
+	<form method="POST" action="/update/{{clients.client_id}}">
+	{% csrf_token %}
+	<table border="1">
+		<tr>
+			<td>Идентификатор</td>
+			<td><input type="text" name="client_id" value="{{clients.client_id}}" readonly></td>
+        </tr>
+		<tr>
+			<td>Имя</td>
+			<td><input type="text" name="name" value="{{clients.name}}"></td>
+        </tr>
+		<tr>
+			<td>Номер телефона</td>
+			<td><input type="text" name="phone_number" value="{{clients.phone_number}}"></td>
+        </tr>
+		</table>
+		<input type="submit" value="Обновить"/>
+		<a href="/clients">Клиенты</a>
+		<p>
+		{% if messages %}
+		{% for updaterecord in messages %}
+		{{updaterecord}}
+		{% endfor %}
+		{% endif %}
+		</form>
+		</center>
+    </body>
+</html>

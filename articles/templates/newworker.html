@@ -1,0 +1,55 @@
+{% load render_table from django_tables2 %}
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+<link rel="stylesheet" href="{{ STATIC_URL }}/static/css/article.css">
+</head>
+    <body>
+	<a href="/clients">Клиенты</a>
+	<a href="/contracts">Контракты</a>
+	<a href="/deliveries">Доставка</a>
+	<a href="/finances">Финансы</a>
+	<a href="/jobs">Должности</a>
+	<a href="/opjournal">Журнал операций</a>
+	<a href="/registry">Реестр товаров</a>
+	<a href="/suppliers">Поставщики</a>
+	<a href="/valuables">Информация о товарах</a>
+	<a href="/workers">Список сотрудников</a>
+	<a href="/logout">Выход из системы</a>
+	<center>
+	<h1>Сотрудники</h1>
+	<table border="1">
+		<tr>
+			<th>Идентификатор</th>
+			<th>ФИО</th>
+			<th>Должность</th>
+			<th>Дата рождения</th>
+			<th>Номер паспорта</th>
+			<th>Номер телефона</th>
+        </tr>
+		{% for obj in objs %}
+		<tr>
+			<td>{{ obj.worker_id }}</td>
+			<td>{{ obj.name }}</td>
+			<td>{{ obj.jobs_job_name }}</td>
+			<td>{{ obj.date_of_birth }}</td>
+			<td>{{ obj.passport_number }}</td>
+			<td>{{ obj.phone_number }}</td>
+			<td><a href="/edit/{{ contract_id }}/">Редактировать</a></td>
+        </tr>
+		{% endfor %}
+		<tr>
+			<td><input type="text" name="clients_client_id" value="{{Contracts.clients_client_id}}"></td>
+			<td><input type="text" name="suppliers_supplier_id" value="{{Contracts.suppliers_supplier_id}}"></td>
+			<td><input type="text" name="valuables_data_barcode" value="{{Contracts.valuables_data_barcode}}"></td>
+			<td><input type="text" name="product_amount" value="{{Contracts.product_amount}}"></td>
+			<td><input type="text" name="expected_completion_date" value="{{Contracts.expected_completion_date}}"></td>
+			<td><input type="text" name="expected_completion_date" value="{{Contracts.expected_completion_date}}"></td>
+			<td><input type="submit" value="Добавить"></td>
+		</tr>
+		</table>
+		
+		</center>
+    </body>
+</html>

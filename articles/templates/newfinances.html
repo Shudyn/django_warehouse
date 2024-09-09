@@ -1,0 +1,50 @@
+{% load render_table from django_tables2 %}
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+<link rel="stylesheet" href="{{ STATIC_URL }}/static/css/article.css">
+</head>
+    <body>
+	<a href="/clients">Клиенты</a>
+	<a href="/contracts">Контракты</a>
+	<a href="/deliveries">Доставка</a>
+	<a href="/finances">Финансы</a>
+	<a href="/jobs">Должности</a>
+	<a href="/opjournal">Журнал операций</a>
+	<a href="/registry">Реестр товаров</a>
+	<a href="/suppliers">Поставщики</a>
+	<a href="/valuables">Информация о товарах</a>
+	<a href="/workers">Список сотрудников</a>
+	<a href="/logout">Выход из системы</a>
+	<center>
+	<h1>Финансовые операции</h1>
+	<table border="1">
+		<tr>
+			<th>Идентификатор</th>
+			<th>Плата</th>
+			<th>Идентификатор контракта</th>
+			<th>Выполнено(+/-)</th>
+        </tr>
+		{% for obj in objs %}
+		<tr>
+			<td>{{ obj.finance_op_id }}</td>
+			<td>{{ obj.payment }}</td>
+			<td>{{ obj.contracts_contract_id }}</td>
+			<td>{{ obj.transaction_completion }}</td>
+			<td><a href="/edit/{{ contract_id }}/">Редактировать</a></td>
+        </tr>
+		{% endfor %}
+		<tr>
+			<td><input type="text" name="contract_id" value="{{Contracts.contract_id}}"></td>
+			<td><input type="text" name="operation_type" value="{{Contracts.operation_type}}"></td>
+			<td><input type="text" name="clients_client_id" value="{{Contracts.clients_client_id}}"></td>
+			<td><input type="text" name="suppliers_supplier_id" value="{{Contracts.suppliers_supplier_id}}"></td>
+			<td><input type="text" name="valuables_data_barcode" value="{{Contracts.valuables_data_barcode}}"></td>	
+			<td><input type="submit" value="Добавить"></td>
+		</tr>
+		</table>
+		
+		</center>
+    </body>
+</html>

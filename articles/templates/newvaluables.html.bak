@@ -1,0 +1,49 @@
+{% load render_table from django_tables2 %}
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+<link rel="stylesheet" href="{{ STATIC_URL }}/static/css/article.css">
+</head>
+    <body>
+	<a href="/clients">Клиенты</a>
+	<a href="/contracts">Контракты</a>
+	<a href="/deliveries">Доставка</a>
+	<a href="/finances">Финансы</a>
+	<a href="/jobs">Должности</a>
+	<a href="/opjournal">Журнал операций</a>
+	<a href="/registry">Реестр товаров</a>
+	<a href="/suppliers">Поставщики</a>
+	<a href="/valuables">Информация о товарах</a>
+	<a href="/workers">Список сотрудников</a>
+	<a href="/logout">Выход из системы</a>
+	<center>
+	<h1>Информация о товарах</h1>
+	<table border="1">
+		<tr>
+			<th>Штрихкод</th>
+			<th>Тип упаковки</th>
+			<th>Стоимость за единицу</th>
+			<th>Подходящие зоны для расположения</th>
+        </tr>
+		{% for obj in objs %}
+		<tr>
+			<td>{{ obj.barcode }}</td>
+			<td>{{ obj.package_type }}</td>
+			<td>{{ obj.value }}</td>
+			<td>{{ obj.appropriate_zones }}</td>
+			<td><a href="/edit/{{ contract_id }}/">Редактировать</a></td>
+        </tr>
+		{% endfor %}
+		<tr>
+			<td> </td>
+			<td> </td>
+			<td> </td>
+			<td> </td>
+			<td><a href="/add/">Добавить</a></td>
+		</tr>
+		</table>
+		
+		</center>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="{{ STATIC_URL }}/static/css/article.css">
+</head>
+<title>
+База данных склада
+</title>
+<body>
+<a href="/clients">Клиенты</a>
+<a href="/contracts">Контракты</a>
+<a href="/deliveries">Доставка</a>
+<a href="/finances">Финансы</a>
+<a href="/jobs">Должности</a>
+<a href="/opjournal">Журнал операций</a>
+<a href="/registry">Реестр товаров</a>
+<a href="/suppliers">Поставщики</a>
+<a href="/valuables">Информация о товарах</a>
+<a href="/workers">Список сотрудников</a>
+<a href="/logout">Выход из системы</a>
+<h1>Главное меню системы.</h1>
+<p>
+<p>
+<p>
+<p>
+<h2>Новостная лента</h2>
+<div class="archive">
+{% for post in posts %}
+<h2 class="post-title"><a href="article/{{post.id}}">{{ post.title }}</a></h2> 
+
+<div class="one-post">
+
+<div class="article-info"></div>
+<div class="article-author">{{post.author.username }}</div><div class="article-created-date">{{post.created_date }}</div>
+<div class="article-text">{{ post.get_excerpt }}</div>
+</div>
+
+{% endfor %}
+</div>
+</body>
+</html>

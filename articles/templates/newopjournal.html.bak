@@ -1,0 +1,61 @@
+{% load render_table from django_tables2 %}
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+<link rel="stylesheet" href="{{ STATIC_URL }}/static/css/article.css">
+</head>
+    <body>
+	<a href="/clients">Клиенты</a>
+	<a href="/contracts">Контракты</a>
+	<a href="/deliveries">Доставка</a>
+	<a href="/finances">Финансы</a>
+	<a href="/jobs">Должности</a>
+	<a href="/opjournal">Журнал операций</a>
+	<a href="/registry">Реестр товаров</a>
+	<a href="/suppliers">Поставщики</a>
+	<a href="/valuables">Информация о товарах</a>
+	<a href="/workers">Список сотрудников</a>
+	<a href="/logout">Выход из системы</a>
+	<center>
+	<h1>Журнал Операций</h1>
+	<table border="1">
+		<tr>
+			<th>Идентификатор</th>
+			<th>Тип операции</th>
+			<th>Номер контракта</th>
+			<th>Штрихкод товара</th>
+			<th>Идентификатор клиента</th>
+			<th>Идентификатор ответственного</th>
+			<th>Ожидаемая дата выполнения</th>
+			<th>Количество</th>
+        </tr>
+		{% for obj in objs %}
+		<tr>
+			<td>{{ obj.operation_id }}</td>
+			<td>{{ obj.operation_type }}</td>
+			<td>{{ obj.contracts_contract_id }}</td>
+			<td>{{ obj.valuables_data_barcode }}</td>
+			<td>{{ obj.clients_client_id }}</td>
+			<td>{{ obj.worker_worker_id }}</td>
+			<td>{{ obj.operation_date }}</td>
+			<td>{{ obj.amount }}</td>
+			<td><a href="/edit/{{ contract_id }}/">Редактировать</a></td>
+        </tr>
+		{% endfor %}
+		<tr>
+<td><input type="text" name="contract_id" value="{{Contracts.contract_id}}"></td>
+			<td><input type="text" name="operation_type" value="{{Contracts.operation_type}}"></td>
+			<td><input type="text" name="clients_client_id" value="{{Contracts.clients_client_id}}"></td>
+			<td><input type="text" name="suppliers_supplier_id" value="{{Contracts.suppliers_supplier_id}}"></td>
+			<td><input type="text" name="valuables_data_barcode" value="{{Contracts.valuables_data_barcode}}"></td>
+			<td><input type="text" name="product_amount" value="{{Contracts.product_amount}}"></td>
+			<td><input type="text" name="expected_completion_date" value="{{Contracts.expected_completion_date}}"></td>
+			<td><input type="text" name="expected_completion_date" value="{{Contracts.expected_completion_date}}"></td>
+			<td><input type="submit" value="Добавить"></td>
+		</tr>
+		</table>
+		
+		</center>
+    </body>
+</html>
